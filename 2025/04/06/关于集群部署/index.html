@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#3367D6"/>
+  <link rel="apple-touch-icon" href="/icons-192.png">
+  <link rel="manifest" href="/manifest.json">
+  
+  <meta name="generator" content="Hexo 7.3.0">
+
+  
+
+  
+
+  
+    <meta name="author" content="长情">
+  
+
+  
+
+  
+
+  <title>关于集群部署 | 长情</title>
+
+  
+
+  
+    <link rel="shortcut icon" href="/favicon.ico">
+  
+
+  
+
+  
+
+  
+
+  
+<link rel="stylesheet" href="/css/style.css">
+
+</head>
+<body>
+  <div class="root-container">
+    
+<!-- header container -->
+<header class="header-container post">
+  
+    <div class="post-image" style="background-image: url(https://qiniu.sukoshi.xyz/src/images/68686407_p0.jpg)"></div>
+  
+
+  <!-- navbar -->
+<nav class="navbar">
+  <div class="navbar-content">
+    <!-- logo -->
+    <div class="navbar-logo">
+      <a href="/">
+        
+          长情
+        
+      </a>
+    </div>
+    <!-- link -->
+    <div class="navbar-link">
+      <div class="navbar-btn">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <ul class="navbar-list">
+        
+          <li class="navbar-list-item"><a href="/">首页</a></li>
+        
+          <li class="navbar-list-item"><a href="/archives">归档</a></li>
+        
+          <li class="navbar-list-item"><a href="/links">友链</a></li>
+        
+          <li class="navbar-list-item"><a href="/about">关于</a></li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+    <div class="header-content">
+      <div class="post-text layout-block">
+        <div class="layout-margin">
+          <h1 class="title-wrap">关于集群部署</h1>
+          <h2 class="title-sub-wrap">
+            <strong>长情</strong>
+            <span>发布于</span>
+            <time  class="article-date" datetime="2025-04-05T16:24:30.000Z" itemprop="datePublished">2025-04-06</time>
+          </h2>
+          
+          
+          <ul class="wrap-list dark">
+  
+</ul>
+          <ul class="wrap-list dark">
+  
+</ul>
+        </div>
+      </div>
+    </div>
+  
+
+  
+  
+  
+</header>
+
+    <!-- 文章 -->
+
+<!-- 文章内容 -->
+<div class="body-container">
+  <article class="content-container layout-block post-container">
+    <div class="article-info">
+      
+      
+      
+      
+      <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
+        <p><font style="color:rgb(53, 56, 65);">无论采用何种部署方式，推荐用户把xxx集群中所有服务节点放到一个vip下面，然后挂到一个域名下面</font></p>
+<h3 id="vip是什么？"><a href="#vip是什么？" class="headerlink" title="vip是什么？"></a><font style="color:rgb(53, 56, 65);">vip是什么？</font></h3><p><font style="color:rgba(0, 0, 0, 0.85);">VIP（Virtual IP，虚拟 IP）是一种抽象出来的、并非与特定物理网络接口直接绑定的 IP 地址，以下为你详细介绍它的相关情况</font></p>
+<p><font style="color:rgba(0, 0, 0, 0.85);">高可用篇之Keepalived （HAProxy+keepalived 搭建高可用负载均衡集群）</font><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1644893">https://cloud.tencent.com/developer/article/1644893</a></p>
+<h3 id="怎么实现虚拟ip"><a href="#怎么实现虚拟ip" class="headerlink" title="怎么实现虚拟ip"></a><font style="color:rgba(0, 0, 0, 0.85);">怎么实现虚拟ip</font></h3><p><font style="color:rgba(0, 0, 0, 0.85);">通常会借助一些网络设备（如支持虚拟 IP 功能的路由器、交换机等）或者软件层面的负载均衡工具（如 LVS、Keepalived 等）来实现 VIP 的配置和流量转发等功能。这些工具可以监控各个实际服务节点的状态，动态调整流量走向，确保服务的可靠性和高效性</font></p>
+<h3 id="Nacos集群架构图"><a href="#Nacos集群架构图" class="headerlink" title="Nacos集群架构图"></a><font style="color:rgba(0, 0, 0, 0.85);">Nacos集群架构图</font></h3><p>这里把nacos部署成无状态应用 nacos的数据存储在mysql数据库</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/svg/38459205/1732170007454-7710d4cf-ff36-46ee-ad66-a053454cae48.svg"></p>
+<h3 id="Mysql集群架构图"><a href="#Mysql集群架构图" class="headerlink" title="Mysql集群架构图"></a>Mysql集群架构图</h3><p>主从读写分离</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732191709939-9f6c08f0-80de-49e6-9fd9-51bbee8a9f98.png"></p>
+<p>分片模式</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732191988277-18322ead-b178-4a6e-94eb-d691866d5f3a.png"></p>
+<h3 id="Redis集群架构图"><a href="#Redis集群架构图" class="headerlink" title="Redis集群架构图"></a>Redis集群架构图</h3><h5 id="1-主从复制模式（Master-SlaveMaster-Slave）"><a href="#1-主从复制模式（Master-SlaveMaster-Slave）" class="headerlink" title="1.主从复制模式（Master-SlaveMaster-Slave）"></a>1.主从复制模式（<font style="color:rgb(51, 51, 51);">Master-SlaveMaster-Slave</font>）</h5><p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732193550954-57c6262e-9503-45c2-9a7a-1f98f59ed0cd.png"></p>
+<h5 id="2-哨兵模式（Sentinel）"><a href="#2-哨兵模式（Sentinel）" class="headerlink" title="2.哨兵模式（Sentinel）"></a>2.哨兵模式（<font style="color:rgb(51, 51, 51);">Sentinel</font>）</h5><p>哨兵可以和redis部署在一起也可以单独部署，一般遵循奇数个的原则</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732193663914-e8566802-fecd-409b-8bc3-e1e191514c96.png"></p>
+<h5 id="3-Cluster模式（数据分片"><a href="#3-Cluster模式（数据分片" class="headerlink" title="3.Cluster模式（数据分片)"></a>3.Cluster模式（数据分片)</h5><p><font style="color:rgb(51, 51, 51);">Cluster模式是Redis的一种高级集群模式，它通过数据分片和分布式存储实现了负载均衡和高可用性。在Cluster模式下，Redis将所有的键值对数据分散在多个节点上。每个节点负责一部分数据，称为槽位。通过对数据的分片，Cluster模式可以突破单节点的内存限制，实现更大规模的数据存储</font></p>
+<p><font style="color:rgb(51, 51, 51);">Redis Cluster将数据分为16384个槽位，每个节点负责管理一部分槽位。当客户端向Redis Cluster发送请求时，Cluster会根据键的哈希值将请求路由到相应的节点。具体来说，Redis Cluster使用CRC16算法计算键的哈希值，然后对16384取模，得到槽位编号</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732193748597-4fa582c7-f41d-448a-bc37-9b20ec66457a.png"></p>
+<h3 id="RabbitMQ集群架构图"><a href="#RabbitMQ集群架构图" class="headerlink" title="RabbitMQ集群架构图"></a><strong><font style="color:rgb(0, 0, 0);">RabbitMQ集群架构图</font></strong></h3><p>普通模式</p>
+<p>1.主备模式</p>
+<p><font style="color:rgb(51, 51, 51);">高可靠性解决方案，主要就是实现数据的同步，一般来讲是 2 - 3 个节点实现数据同步</font></p>
+<p><font style="color:rgb(51, 51, 51);">主节点如果挂了，从节点提供服务而已。如果主节点没有挂，备用节点是不提供服务的。</font></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732195282182-c3429036-aded-4494-979d-3dbb6e80380d.png"></p>
+<p>2.镜像模式</p>
+<p>基于CP强一致性</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732195326086-7efcec2b-33b5-42d9-afc8-8eb1228252b9.png"></p>
+<p>HaProxy:TCP负载均衡服务器或者可以使用阿里云SLB服务</p>
+<p>因为不是http协议 所以这里无法使用nginx作为负载衡服务器</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732196132404-1d8935c0-8dc5-42ec-ab3d-5e7e81eb0711.png"></p>
+<p>3.多活模式</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732195507661-95ba2326-a5e0-474d-9c21-d6e1dc7512e3.png"></p>
+<p>4.远程模式</p>
+<p>跨机房跨地域</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732195440690-6d2758cc-f9c0-4c45-b9d6-cd2dc5cc6d14.png"></p>
+<h3 id="Sentinel集群机构图"><a href="#Sentinel集群机构图" class="headerlink" title="Sentinel集群机构图"></a><font style="color:rgb(51, 51, 51);">Sentinel集群机构图</font></h3><p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1732187493379-538b1f79-6215-4349-baa2-25221cd748ec.png?x-oss-process=image/format,webp/resize,w_1049,limit_0"></p>
+<p>Sentinel包括Sentinel-service 和Sentinel-client 还有一个可视化的面板 面板 dashboard  需要单独启动</p>
+<p>client：嵌入到每个服务里面  嵌入到服务提供者或消费者（业务应用）中，与业务逻辑一起运行<strong>职责</strong>：</p>
+<ul>
+<li>实时监控应用的流量数据。</li>
+<li>根据规则（如限流、降级、熔断）对流量进行动态调控。</li>
+<li>报告监控数据给 Sentinel-service（可选，启用集群模式时）</li>
+</ul>
+<p>service：集群模式单独部署，无状态应用和普通的springboot应用没有什么区别，无状态应用保证高可用可以部署普通集群。</p>
+<p> dashboard：独立的 Web 应用程序，用于管理和监控 <strong>Sentinel-client</strong> 的规则和运行状态 无状态应用 保证高可用可以部署普通集群。</p>
+<h3 id="Elasticsearch集群架构"><a href="#Elasticsearch集群架构" class="headerlink" title="Elasticsearch集群架构"></a>Elasticsearch集群架构</h3><p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1733658416386-c675f02a-7b3b-4cc0-97d4-983618d61043.png"></p>
+<p>在默认情况下，一个节点既承担了候选节点（主节点挂了选举为主节点），数据节点（存储数据的节点），协调节点（负责路由的节点）的功能。但是企业开发中会把它们的职责分离。通过控制启动参数进行设置。主节点会对其他节点进行管理，如果数据节点发生故障，主节点会进行故障转移，把副本数恢复到其他安全的节点上。保证故障节点上的数据不会丢失。如果主节点挂了，会在候选节点中进行选举，节点个数应该是奇数个，，避免因为网络问题出现集群脑裂。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1733714147037-be36ced4-59ad-4503-844c-afbac1ba4826.png?x-oss-process=image/format,webp/resize,w_944,limit_0"></p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1733714190573-157e73ea-9daa-4cb2-bb27-b920a390344f.png?x-oss-process=image/format,webp/resize,w_944,limit_0"></p>
+<p>es中访问哪个协调节点是等价的，因此只需要在es协调节点前面加一个负载均衡器就可以了</p>
+<h3 id="同城多活、异地双活、异地多活"><a href="#同城多活、异地双活、异地多活" class="headerlink" title="同城多活、异地双活、异地多活"></a>同城多活、异地双活、异地多活</h3><p>同城多活一般采用专线，也就是同城机房与机房之间部署专线，还有一些其他技术来一起实现，基本可以认为是同一个机房，实现AP强一致性</p>
+<p>异地双活：在南方的用户访问南方的集群，在北方的访问北方的集群 ，南北集群采用异步双向同步机制（具体实现看厂商的技术），实现AP最终一致性。</p>
+<p>异地多活在异地双活的基础上扩展普通集群就可以实现了。</p>
+<h3 id="主备和主从的区别"><a href="#主备和主从的区别" class="headerlink" title="主备和主从的区别"></a>主备和主从的区别</h3><p>主备模式和主从模式是在计算机系统、数据库管理等领域常用的两种数据冗余和高可用性策略，它们有以下区别：</p>
+<p><strong>一、概念定义</strong></p>
+<ul>
+<li><strong>主备模式</strong><ul>
+<li>主备模式是一种简单的冗余配置方式。在这种模式下，有一个主系统（节点）处于活跃状态，负责处理所有的业务操作。而备用系统（节点）平时处于等待状态，它会不断地监测主系统的状态。</li>
+<li>例如，在一个网络服务器的主备模式中，主服务器正常提供网页服务，接收用户的访问请求并进行处理。备用服务器则定期向主服务器发送心跳信号来检查其是否正常运行，自身并不处理用户请求。</li>
+</ul>
+</li>
+<li><strong>主从模式</strong><ul>
+<li>主从模式则是一种存在主节点和从节点分工协作的工作方式。主节点主要负责接收和处理写操作（如数据的插入、更新、删除），而从节点主要负责处理读操作。</li>
+<li>以数据库系统为例，在主从数据库架构中，当有用户向主数据库插入一条新的记录（写操作）时，主数据库执行插入操作后，会将更新的数据同步到从数据库。用户对数据的查询（读操作）可以由从数据库来处理，这样可以分担主数据库的负载。</li>
+</ul>
+</li>
+</ul>
+<p><strong>二、数据同步方式</strong></p>
+<ul>
+<li><strong>主备模式</strong><ul>
+<li>数据同步通常是单向的，从主系统到备用系统。当主系统出现故障时，备用系统需要确保能够获取主系统最后的完整数据状态，才能接替主系统的工作。</li>
+<li>比如，有些主备服务器采用日志传输的方式进行同步。主服务器将操作日志（如文件系统的操作记录、数据库事务日志等）不断地发送给备用服务器，备用服务器根据这些日志来更新自己的数据状态，以保持和主服务器的数据一致。</li>
+</ul>
+</li>
+<li><strong>主从模式</strong><ul>
+<li>数据同步方式相对复杂，需要确保从节点的数据与主节点的数据保持一致。同步可以是基于事务的同步或者是基于数据块的同步。</li>
+<li>例如，在数据库的主从复制中，主数据库在执行一个写事务后，会将这个事务的内容（如 SQL 语句或者事务日志中的修改记录）发送给从数据库。从数据库接收到这些信息后，按照相同的顺序在自己的系统中重新执行这些操作，从而实现数据同步。</li>
+</ul>
+</li>
+</ul>
+<p><strong>三、故障切换过程</strong></p>
+<ul>
+<li><strong>主备模式</strong><ul>
+<li>当主系统发生故障时，备用系统会检测到这个情况并立即启动，接替主系统进行工作。这个切换过程相对简单直接，因为备用系统在正常情况下只是处于备份状态，没有其他复杂的操作。</li>
+<li>不过，故障切换过程需要确保备用系统能够快速且正确地接管主系统的所有资源，包括网络地址、存储设备等。例如，在一些网络应用的主备切换中，备用服务器需要快速获取主服务器的 IP 地址，这样用户的请求才能顺利地被备用服务器接收和处理。</li>
+</ul>
+</li>
+<li><strong>主从模式</strong><ul>
+<li>故障切换相对复杂。如果主节点发生故障，需要选择一个从节点来升级为主节点，这个从节点要能够承担主节点的写操作任务。而且，在切换过程中，要确保从节点的数据是最新的，并且在切换后，新的主节点和其他从节点之间的数据同步能够正常进行。</li>
+<li>比如，在一个分布式数据库系统中，主节点故障后，系统需要根据一定的规则（如从节点的数据更新程度、从节点的性能等）来选择一个合适的从节点作为新的主节点。然后，需要对整个系统的数据同步机制进行调整，以适应新的主从架构。</li>
+</ul>
+</li>
+</ul>
+<p><strong>四、应用场景</strong></p>
+<ul>
+<li><strong>主备模式</strong><ul>
+<li>适用于对数据一致性要求极高，且读操作相对较少的场景。例如，一些关键的金融交易系统的核心服务器，平时主要是进行交易处理（写操作），这些系统对数据的准确性和系统的可靠性要求非常高，采用主备模式可以确保在主服务器出现故障时，备用服务器能够无缝接管，避免数据丢失和业务中断。</li>
+</ul>
+</li>
+<li><strong>主从模式</strong><ul>
+<li>适用于读操作频繁、写操作相对较少的场景，如一些大型的内容分发网站。这些网站的用户主要是进行数据查询（读操作），通过设置多个从节点来处理读操作，可以有效地减轻主节点的负载，提高系统的整体性能和响应速度。同时，主从模式也能够在一定程度上保证数据的冗余和高可用性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="分布式系统的脑裂问题"><a href="#分布式系统的脑裂问题" class="headerlink" title="分布式系统的脑裂问题"></a>分布式系统的脑裂问题</h3><p><font style="color:rgb(51, 51, 51);">是指在主从集群中，同时有两个主节点，它们都能接收写请求。而脑裂最直接的影响，就是客户端不知道应该往哪个主节点写入数据，结果就是不同的客户端会往不同的主节点上写入数据。而且严重的话，脑裂会进一步导致</font><font style="color:rgb(0, 82, 217);">数据丢失</font></p>
+<p><font style="color:#000000;">产生2个主节点的原因是原本的主节点和部分节点之间由于网路故障，或者延时抖动导致心跳机制出现问题，其他节点由于检测不到主节点的心跳认为它已经挂了，其实并没有挂掉，其他节点就会重新选举新的主节点，这样集群中就会有2个主节点。</font></p>
+<p><strong>Raft 算法：</strong><font style="color:#000000;"> 为了避免分布式系统中的脑裂问题，通常要求候选节点需要获得超过一半（即 </font><code>&lt;font style=&quot;color:#000000;&quot;&gt;(eligible 节点数量 + 1) / 2&lt;/font&gt;</code><font style="color:#000000;">）的选票才能成为主节点。因此，</font><code>**eligible**</code>** 节点的数量最好是奇数**<font style="color:#000000;">，以确保选票的总数为奇数，这样可以避免出现无法形成多数的情况（比如 50% 对 50% 的平票问题）  </font></p>
+<hr>
+<p><font style="color:rgb(0, 82, 217);"></font></p>
+<h3 id="xxl-job"><a href="#xxl-job" class="headerlink" title="xxl-job"></a>xxl-job</h3><p>xxl-job其实就是典型的springboot应用，xxl-job-admin 的调度中心依赖于mysql数据库，因此，就单xxl-job组件来说他说无状态的，要达到高可用，只需要像普通springboot哪样部署多份共享同一个数据库，进行负载均衡就好了。</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2024/png/38459205/1734163947369-cbf2f1f6-4986-4430-a936-e2cde47e5576.png?x-oss-process=image/format,webp"></p>
+
+      </section>
+
+      
+      
+        <nav class="article-nav">
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2025/04/06/%E6%96%87%E7%AB%A0%E6%A0%87%E9%A2%985/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">文章标题5</h2>
+        </a>
+      
+      <div class="card-text--row">Newer</div>
+    </div>
+  </article>
+</div>
+          
+          
+            <div class="article-nav-item layout-padding">
+  <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
+    
+    <div class="card-text">
+      
+        <a href="/2025/04/06/%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%8C%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">分布式，主从架构 微服务的区别</h2>
+        </a>
+      
+      <div class="card-text--row">Older</div>
+    </div>
+  </article>
+</div>
+          
+        </nav>
+      
+
+      <section class="page-message-container layout-padding">
+        
+
+
+  
+  
+
+  
+  
+
+
+      </section>
+    </div>
+    <div class="widget-info">
+      <section class="widget-author widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-body">
+    
+      <img src="https://s.gravatar.com/avatar/2d6b803eea37de0257620d5fabee7e64?s=200&amp;r=g&amp;d=retro" class="soft-size--round soft-style--box" alt="Sukoshi">
+    
+    
+      <h2>Sukoshi</h2>
+    
+    
+      <p>贵在坚持</p>
+    
+
+    <div class="count-box">
+      <div class="count-box--item">
+        <svg class="icon icon-article" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M240.51564747 647.74217627h196.07203239c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806V165.10332731c0-33.18142087-30.16492806-60.32985613-60.32985612-60.32985611H245.04038668C225.43318342 104.7734712 210.35071939 119.85593522 210.35071939 139.46313845V617.57724821c0 16.59071043 13.57421762 30.16492806 30.16492808 30.16492806z m663.62841731-452.47392089v482.63884894c0 33.18142087-27.14843525 60.32985613-60.32985612 60.32985613H180.18579134c-33.18142087 0-60.32985613-27.14843525-60.32985612-60.32985613V195.26825538c-49.77213131 0-90.49478418 40.72265287-90.49478417 90.49478417v452.4739209c0 49.77213131 40.72265287 90.49478418 90.49478417 90.49478417h286.56681657c16.59071043 0 30.16492806 13.57421762 30.16492807 30.16492807s13.57421762 30.16492806 30.16492805 30.16492806h90.49478418c16.59071043 0 30.16492806-13.57421762 30.16492805-30.16492806s13.57421762-30.16492806 30.16492807-30.16492807h286.56681657c49.77213131 0 90.49478418-40.72265287 90.49478417-90.49478417V285.76303955c0-49.77213131-40.72265287-90.49478418-90.49478417-90.49478417zM587.41232014 647.74217627h191.54729318c19.60720323 0 34.68966726-15.08246403 34.68966729-34.68966727V134.93839925c0-16.59071043-13.57421762-30.16492806-30.16492808-30.16492805H617.57724821c-30.16492806 0-60.32985613 27.14843525-60.32985612 60.32985611v452.4739209c0 16.59071043 13.57421762 30.16492806 30.16492805 30.16492806z" fill="currentColor"></path>
+</svg>
+        <span>10</span>
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+        0
+      </div>
+      <div class="count-box--item">
+        <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+        1
+      </div>
+    </div>
+  </div>
+</section>
+
+      
+
+      
+<section class="widet-notice widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-notice" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M512 945.02305225v28.15620663a24.27259221 24.27259221 0 0 1-24.27259221 24.27259335H394.0352a48.54518557 48.54518557 0 0 1-41.74885888-23.78714112l-110.68302222-184.47170332a132.04290333 132.04290333 0 0 1-17.47626667-48.54518557h118.4502511a200.97706667 200.97706667 0 0 1 76.21594113 14.56355556l20.38897777 133.49925888a48.54518557 48.54518557 0 0 0 36.40888888 27.67075555l16.01991111 2.91271112a24.27259221 24.27259221 0 0 1 20.38897778 25.72894889zM997.45185223 463.45481443a194.18074112 194.18074112 0 0 1-38.8361489 116.50844445 24.75804445 24.75804445 0 0 1-36.4088889 0l-34.95253333-34.95253333a24.27259221 24.27259221 0 0 1-2.91271111-30.58346667 97.09036999 97.09036999 0 0 0 0-106.79940665 24.27259221 24.27259221 0 0 1 2.91271111-30.58346666l34.95253333-34.95253334a24.75804445 24.75804445 0 0 1 18.93262223-7.28177777 26.2144 26.2144 0 0 1 17.47626667 9.70903665A194.18074112 194.18074112 0 0 1 997.45185223 463.45481443z m-194.18074112-388.36148111v776.72296335a48.54518557 48.54518557 0 0 1-48.54518556 48.54518443h-28.64165888a48.54518557 48.54518557 0 0 1-33.98163001-14.07810332l-145.63555556-143.20829668A291.27111111 291.27111111 0 0 0 342.57730333 657.63555556H172.18370333a145.63555556 145.63555556 0 0 1-145.63555556-145.63555556v-97.09036999a145.63555556 145.63555556 0 0 1 145.63555556-145.63555556h170.3936a291.27111111 291.27111111 0 0 0 206.31703779-85.43952668l145.63555555-143.20829554a48.54518557 48.54518557 0 0 1 33.98162888-14.07810446H754.72592555a48.54518557 48.54518557 0 0 1 48.54518556 48.54518555z" fill="currentColor"></path>
+</svg>
+    <span>NOTICE</span>
+  </div>
+  <div class="widget-body">
+    <p>flex-block主题部分重构，详情查看https://github.com/miiiku/flex-block</p>
+  </div>
+</section>
+
+
+      <section class="widget-categories widget-item layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-categories" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M900.3614811 257.09082106h-339.81629553l-67.96326003-101.9448889c-19.41807444-29.12711113-48.54518557-43.69066667-82.52681443-43.69066667H123.6385189c-53.39970333 0-97.09036999 43.69066667-97.09037113 97.09036999v582.54222222c0 53.39970333 43.69066667 97.09036999 97.09037113 97.09037002h776.7229622c53.39970333 0 97.09036999-43.69066667 97.09037113-97.09037002V354.18119104c0-53.39970333-43.69066667-97.09036999-97.09037113-97.09036998z m-97.09036999 242.72592554H220.72888889c-24.27259221 0-48.54518557-24.27259221-48.54518556-48.54518556s24.27259221-48.54518557 48.54518556-48.54518444h582.54222222c24.27259221 0 48.54518557 24.27259221 48.54518556 48.54518444s-24.27259221 48.54518557-48.54518556 48.54518556z" fill="currentColor"></path>
+</svg>
+      <span>CATEGORIES</span>
+  </div>
+  <div class="widget-body">
+    <ul class="categories-list">
+      
+    </ul>
+  </div>
+</section>
+
+      <section class="widget-tags widget-item  layout-margin content-padding--primary soft-size--large soft-style--box">
+  <div class="widget-title">
+    <svg class="icon icon-tags" viewBox="0 0 1098 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M283.42180005 272q0-28.38857157-20.09142843-48.48000001t-48.47999998-20.09142842-48.48000002 20.09142842-20.09142846 48.48000001 20.09142846 48.48 48.48000002 20.09142843 48.47999998-20.09142843 20.09142843-48.48zM855.0332285 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.03999997 263.58857157q-20.9142853 19.81714313-48.75428534 19.81714312-28.38857157 0-48.20571468-19.81714312l-383.04-383.58857157q-20.36571468-19.81714313-34.55999999-54.10285688t-14.19428534-62.6742853l0-222.85714313q0-27.84000002 20.36571469-48.20571469t48.2057147-20.36571466l222.85714313 0q28.38857157 0 62.6742853 14.19428529t54.65142842 34.55999999l383.04000001 382.49142843q19.81714313 20.9142853 19.81714314 48.75428532zM1060.74751475 580.57142843q0 28.38857157-19.81714313 48.2057147l-263.04 263.58857157q-20.9142853 19.81714313-48.75428531 19.81714312-19.26857155 0-31.61142843-7.47428531t-28.38857159-24.13714314l251.79428534-251.7942853q19.81714313-19.81714313 19.81714308-48.20571469 0-27.84000002-19.81714308-48.75428531l-383.04000001-382.49142845q-20.36571468-20.36571468-54.65142842-34.55999999t-62.67428532-14.19428534l120 0q28.38857157 0 62.67428532 14.19428534t54.65142842 34.55999999l383.03999998 382.49142845q19.81714313 20.9142853 19.81714314 48.75428531z" fill="currentColor"></path>
+</svg>
+    <span>TAGS</span>
+  </div>
+  <div class="widget-body">
+    <div class="tags-cloud">
+      <a href="/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/" style="font-size: 10px;" class="tags-cloud-0">服务端常用算法</a>
+    </div>
+  </div>
+</section>
+    </div>
+  </article>
+</div>
+
+    <!-- footer container -->
+<footer id="footer" class="footer">
+  <div class="footer-container">
+    
+    <div class="social-icons">
+      
+        
+      
+        
+      
+        
+      
+        
+          <a href="https://github.com/miiiku/" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-github" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M64.6 512c0 195.6 125.4 361.9 300.1 422.9 23.5 5.9 19.9-10.8 19.9-22.2v-77.6c-135.8 15.9-141.3-74-150.5-89-18.5-31.5-61.9-39.5-49-54.5 31-15.9 62.5 4 98.9 58 26.4 39.1 77.9 32.5 104.1 26 5.7-23.5 17.9-44.5 34.7-60.9-140.7-25.2-199.4-111.1-199.4-213.3 0-49.5 16.4-95.1 48.4-131.8-20.4-60.6 1.9-112.4 4.9-120.1 58.2-5.2 118.5 41.6 123.3 45.3 33.1-8.9 70.8-13.7 112.9-13.7 42.4 0 80.3 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.4-43.9 2.9 7.7 24.7 58.3 5.5 118.1 32.5 36.8 49 82.8 49 132.4 0 102.3-59 188.3-200.2 213.2 23.5 23.3 38.1 55.5 38.1 91.1v112.7c0.8 9 0 17.9 15.1 17.9C832.7 877 960.4 709.4 960.4 512.1c0-247.5-200.6-447.9-447.9-447.9C265 64.1 64.6 264.5 64.6 512z"></path>
+</svg>
+          </a>
+        
+      
+        
+          <a href="https://twitter.com/guanquanhong" class="soft-size--primary soft-style--box" target="_blank" rel="noopener noreferrer">
+            <svg class="icon icon-twitter" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+  <path d="M962.285714 233.142857q-38.285714 56-92.571429 95.428571 0.571429 8 0.571429 24 0 74.285714-21.714286 148.285714t-66 142-105.428571 120.285714-147.428571 83.428571-184.571429 31.142857q-154.857143 0-283.428571-82.857143 20 2.285714 44.571429 2.285714 128.571429 0 229.142857-78.857143-60-1.142857-107.428571-36.857143t-65.142857-91.142857q18.857143 2.857143 34.857143 2.857143 24.571429 0 48.571429-6.285714-64-13.142857-106-63.714286t-42-117.428571l0-2.285714q38.857143 21.714286 83.428571 23.428571-37.714286-25.142857-60-65.714286t-22.285714-88q0-50.285714 25.142857-93.142857 69.142857 85.142857 168.285714 136.285714t212.285714 56.857143q-4.571429-21.714286-4.571429-42.285714 0-76.571429 54-130.571429t130.571429-54q80 0 134.857143 58.285714 62.285714-12 117.142857-44.571429-21.142857 65.714286-81.142857 101.714286 53.142857-5.714286 106.285714-28.571429z"></path>
+</svg>
+          </a>
+        
+      
+    </div>
+     
+    <p>&copy; 2025 <a href="/" target="_blank">长情</a></p>
+
+    
+
+    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+    <p>
+      <a href="javascript:;" id="theme-light">🌞 浅色</a>
+      <a href="javascript:;" id="theme-dark">🌛 深色</a>
+      <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
+    </p>
+  </div>
+</footer>
+  </div>
+
+  <div class="back-to-top-fixed soft-size--round soft-style--box">
+    <svg class="icon icon-back-to-top" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg">
+      <path d="M725.333333 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8l-213.333333-213.333333c-17.066667-17.066667-17.066667-42.666667 0-59.733333s42.666667-17.066667 59.733333 0l213.333333 213.333333c17.066667 17.066667 17.066667 42.666667 0 59.733333C746.666667 422.4 738.133333 426.666667 725.333333 426.666667z"></path>
+      <path d="M298.666667 426.666667c-12.8 0-21.333333-4.266667-29.866667-12.8-17.066667-17.066667-17.066667-42.666667 0-59.733333l213.333333-213.333333c17.066667-17.066667 42.666667-17.066667 59.733333 0s17.066667 42.666667 0 59.733333l-213.333333 213.333333C320 422.4 311.466667 426.666667 298.666667 426.666667z"></path>
+      <path d="M512 896c-25.6 0-42.666667-17.066667-42.666667-42.666667L469.333333 170.666667c0-25.6 17.066667-42.666667 42.666667-42.666667s42.666667 17.066667 42.666667 42.666667l0 682.666667C554.666667 878.933333 537.6 896 512 896z"></path>
+    </svg>
+  </div>
+
+  
+  
+
+
+
+
+
+
+<!-- copy button  -->
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.11/dist/clipboard.min.js"></script>
+
+<!-- https://clipboardjs.com/ -->
+
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+  
+  <!-- 尾部用户自定义相关内容 -->
+</body>
+</html>
