@@ -22,7 +22,7 @@
 
   
 
-  <title>拜占庭将军问题 | 长情</title>
+  <title>流量削峰算法 | 长情</title>
 
   
 
@@ -46,7 +46,7 @@
 <!-- header container -->
 <header class="header-container post">
   
-    <div class="post-image" style="background-image: url(/1704264337798170426433788.jpg)"></div>
+    <div class="post-image" style="background-image: url(/1730167239445173016723980.jpg)"></div>
   
 
   <!-- navbar -->
@@ -99,18 +99,25 @@
     <div class="header-content">
       <div class="post-text layout-block">
         <div class="layout-margin">
-          <h1 class="title-wrap">拜占庭将军问题</h1>
+          <h1 class="title-wrap">流量削峰算法</h1>
           <h2 class="title-sub-wrap">
             <strong>长情</strong>
             <span>发布于</span>
-            <time  class="article-date" datetime="2025-04-05T16:24:19.000Z" itemprop="datePublished">2025-04-06</time>
+            <time  class="article-date" datetime="2024-04-05T16:21:41.000Z" itemprop="datePublished">2024-04-06</time>
           </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2025-04-05T18:04:28.604Z" itemprop="dateUpdated">2025-04-06</time>
+            </h2>
           
           
           <ul class="wrap-list dark">
   
 </ul>
           <ul class="wrap-list dark">
+  
+    <li><a href="/tags/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%B8%B8%E7%94%A8%E7%AE%97%E6%B3%95/">🏷️ 服务端常用算法</a></li>
   
 </ul>
         </div>
@@ -134,9 +141,97 @@
       
       
       <section class="article-entry markdown-body layout-margin content-padding--large soft-size--large soft-style--box">
-        <p><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV1yJ411v7xV/?spm_id_from=333.337.search-card.all.click&vd_source=d5e5df0685b8ce6d6c62551d2ce3e8bb">https://www.bilibili.com/video/BV1yJ411v7xV/?spm_id_from&#x3D;333.337.search-card.all.click&amp;vd_source&#x3D;d5e5df0685b8ce6d6c62551d2ce3e8bb</a></p>
-<p><strong>描述：</strong><font style="color:rgb(51, 51, 51);">在军队内有可能存有叛徒和敌军的间谍，左右将军们的决定又扰乱整体军队的秩序。在进行共识时，结果并不代表大多数人的意见。这时候，在已知有成员谋反的情况下，其余忠诚的将军在不受叛徒的影响下如何达成一致的协议，拜占庭问题就此形成</font></p>
-<p><strong>口头协议：</strong>m 是恶意节点的个数，n 是总节点的个数，满足 n&gt;3m 时，该问题是可解的</p>
+        <p>流量削峰算法通常用于网络流量管理和带宽控制，目的是通过平滑数据流量来减少突发的高峰负载，避免网络拥堵。削峰技术在数据传输中起到缓冲作用，确保网络资源得以更均匀的利用。</p>
+<ol>
+<li><strong>令牌桶算法（Token Bucket）</strong>：<br>令牌桶算法是一种流量控制算法，用于限制流量的突发性。它使用令牌的方式来控制数据流的传输。令牌以一定速率生成，数据包必须等待获取足够的令牌才能传输。这个算法可以有效平滑突发流量，同时允许短期的流量突发。</li>
+<li><strong>漏桶算法（Leaky Bucket）</strong>：<br>漏桶算法通过模拟水流漏斗的方式限制数据流量的变化。数据包可以不断地到达桶中，但是桶中只能容纳固定数量的数据包，超过部分将被丢弃。它确保数据流以恒定速率输出，平滑了流量的波动。</li>
+<li><strong>加权公平队列（WFQ，Weighted Fair Queueing）</strong>：<br>加权公平队列是一种根据优先级和带宽要求来分配资源的算法。它通常用于多个流量流共享同一网络链路的情况下，保证高优先级流量的需求，同时尽量平滑低优先级流量的变化。</li>
+<li><strong>平滑控制算法</strong>：<br>这类算法通过改变数据流的发送速率来平滑流量波动，常见的实现方式是基于滑动窗口或缓冲区大小的调整。例如，TCP协议通过调整拥塞窗口的大小来实现流量控制。</li>
+</ol>
+<h1 id="令牌桶算法"><a href="#令牌桶算法" class="headerlink" title="令牌桶算法"></a>令牌桶算法</h1><h3 id="1-API限流"><a href="#1-API限流" class="headerlink" title="1. API限流"></a>1. <strong>API限流</strong></h3><p>在后端开发中，最常见的使用场景是<strong>API请求限流</strong>。对于高并发的Web应用，尤其是提供公共API的场景，使用令牌桶算法可以避免系统被过多的请求压垮，保证服务的稳定性。</p>
+<h4 id="如何使用令牌桶进行API限流："><a href="#如何使用令牌桶进行API限流：" class="headerlink" title="如何使用令牌桶进行API限流："></a>如何使用令牌桶进行API限流：</h4><ul>
+<li>每次用户请求API时，首先会检查令牌桶中是否有令牌。</li>
+<li>如果有令牌，则允许请求继续执行，且从桶中消耗一个令牌。</li>
+<li>如果没有令牌，则请求被拒绝或被延迟，直到桶中有足够的令牌。</li>
+<li>令牌桶的生成速率（即令牌生成速率）通常与API的最大处理能力相匹配，桶的容量则决定了系统对突发流量的处理能力。</li>
+</ul>
+<h3 id="2-流量控制和带宽管理"><a href="#2-流量控制和带宽管理" class="headerlink" title="2. 流量控制和带宽管理"></a>2. <strong>流量控制和带宽管理</strong></h3><p>在后端开发中，令牌桶算法也可以用来控制带宽流量，尤其是在数据传输、视频流处理等需要稳定带宽的场景中。它能够保证系统的带宽不会被短时间内大量的数据请求占用，并且允许一定的带宽突发。</p>
+<h3 id="3-分布式限流"><a href="#3-分布式限流" class="headerlink" title="3. 分布式限流"></a>3. <strong>分布式限流</strong></h3><p>对于分布式系统，令牌桶算法可以与<strong>分布式缓存</strong>（如Redis、Memcached）结合使用，实现分布式限流。这样可以确保整个系统的请求速率得到有效控制，不会因为某个节点的突发流量导致系统其他部分的压力过大。</p>
+<h3 id="4-请求排队与延迟控制"><a href="#4-请求排队与延迟控制" class="headerlink" title="4. 请求排队与延迟控制"></a>4. <strong>请求排队与延迟控制</strong></h3><p>在某些情况下，令牌桶算法还可以与请求排队系统结合使用，平衡请求的延迟和吞吐量。通过控制令牌的生成速率，可以让请求按照一定的速率进入系统，而不是瞬间处理所有请求。</p>
+<h3 id="5-微服务架构中的流量控制"><a href="#5-微服务架构中的流量控制" class="headerlink" title="5. 微服务架构中的流量控制"></a>5. <strong>微服务架构中的流量控制</strong></h3><p>在微服务架构中，每个服务可能都有不同的流量限制需求。通过在服务之间部署令牌桶算法，可以确保不同服务之间的流量不冲突，避免某个服务因流量过载影响整个系统。</p>
+<h3 id="优点："><a href="#优点：" class="headerlink" title="优点："></a>优点：</h3><ul>
+<li><strong>平滑流量</strong>：允许突发流量同时保持平均速率在合理范围内。</li>
+<li><strong>易于实现</strong>：令牌桶算法的实现相对简单，并且适应多种场景（如限流、带宽管理、排队控制等）。</li>
+<li><strong>灵活性</strong>：通过调整令牌生成速率和桶的容量，可以非常灵活地应对不同的需求，提供不同的速率控制。</li>
+</ul>
+<h3 id="实现方式："><a href="#实现方式：" class="headerlink" title="实现方式："></a>实现方式：</h3><p>在后端开发中，令牌桶算法可以使用以下技术实现：</p>
+<ul>
+<li><strong>内存实现</strong>：直接在应用中用内存数据结构（如队列或计时器）实现令牌桶。</li>
+<li><strong>分布式缓存</strong>：利用Redis、Memcached等缓存系统，在分布式环境下共享令牌桶。</li>
+<li><strong>异步任务</strong>：对于需要延迟执行的请求，可以将令牌桶和消息队列结合，异步处理请求。</li>
+</ul>
+<h1 id="漏桶算法"><a href="#漏桶算法" class="headerlink" title="漏桶算法"></a>漏桶算法</h1><h3 id="漏桶算法的基本原理："><a href="#漏桶算法的基本原理：" class="headerlink" title="漏桶算法的基本原理："></a>漏桶算法的基本原理：</h3><p>漏桶算法的核心思想是将请求看作水流，桶作为容器，水流代表请求。桶有两个主要的特性：</p>
+<ol>
+<li><strong>固定容量的桶</strong>：桶有一个最大容量，表示系统所能容纳的最大请求量。如果桶已经满了，新的请求就会被丢弃。</li>
+<li><strong>恒定速率的漏水口</strong>：漏桶的漏水速率是固定的，表示请求流出系统的速率。无论请求到达的速度如何，都会按照固定的速率流出。</li>
+</ol>
+<p>通过这种方式，漏桶算法能够将请求流量“平滑”到一个恒定速率，避免系统因突发流量而遭受过载。</p>
+<h3 id="工作流程："><a href="#工作流程：" class="headerlink" title="工作流程："></a>工作流程：</h3><ol>
+<li><strong>请求到达</strong>：每个请求都会被放入漏桶中。</li>
+<li><strong>请求处理</strong>：请求按照固定的速率从漏桶中流出，进入系统处理。如果请求到达的速率过快，导致桶满了，则新来的请求会被丢弃。</li>
+<li><strong>突发流量控制</strong>：漏桶算法的漏水速率是恒定的，因此即使在流量突发的情况下，处理速率也不会受到影响，系统会以固定速率处理请求。</li>
+</ol>
+<h3 id="漏桶算法的主要特点："><a href="#漏桶算法的主要特点：" class="headerlink" title="漏桶算法的主要特点："></a>漏桶算法的主要特点：</h3><ul>
+<li><strong>固定速率输出</strong>：无论输入速率如何变化，输出速率总是恒定的。这意味着，系统的处理速率是平稳的，突发流量不会影响到系统的稳定性。</li>
+<li><strong>突发流量丢弃</strong>：如果请求到达的速率超过了桶的容量或桶的漏水速率，新到达的请求会被丢弃。这在某些应用场景下可能会导致请求丢失。</li>
+<li><strong>简单易实现</strong>：漏桶算法的实现非常简单，适合用于需要稳定速率的场景。</li>
+</ul>
+<h3 id="漏桶算法的实现方式："><a href="#漏桶算法的实现方式：" class="headerlink" title="漏桶算法的实现方式："></a>漏桶算法的实现方式：</h3><p>漏桶算法的实现主要包括以下几个步骤：</p>
+<ol>
+<li><strong>请求进入桶</strong>：每当有新的请求到达时，将请求放入桶中。如果桶没有满，则继续执行。</li>
+<li><strong>请求丢弃</strong>：如果桶已满，新的请求将会被丢弃。</li>
+<li><strong>请求流出</strong>：桶中的请求按照固定速率流出，进入系统处理。</li>
+</ol>
+<h3 id="漏桶算法与令牌桶算法的对比："><a href="#漏桶算法与令牌桶算法的对比：" class="headerlink" title="漏桶算法与令牌桶算法的对比："></a>漏桶算法与令牌桶算法的对比：</h3><ul>
+<li><strong>令牌桶算法</strong>允许短时间内的突发流量，桶满时请求会被阻塞或者丢弃；它是基于令牌的生成和消耗来控制流量。</li>
+<li><strong>漏桶算法</strong>则限制了流量的波动，它只能按固定的速率输出请求，突发流量会被丢弃，但不会影响请求的处理速率。</li>
+</ul>
+<h1 id="加权公平队列"><a href="#加权公平队列" class="headerlink" title="加权公平队列"></a>加权公平队列</h1><p><strong>加权公平队列（WFQ，Weighted Fair Queueing）</strong> 是一种用于网络流量调度和流量控制的算法，它是一种改进版的<strong>公平队列算法（Fair Queueing，FQ）</strong>。WFQ的目标是确保网络中不同流的带宽分配能够根据其权重进行公平的调度。在后端开发和网络管理中，WFQ常用于<strong>流量整形</strong>和<strong>带宽管理</strong>，特别是在高负载和多种服务质量（QoS）需求的环境中。</p>
+<h3 id="WFQ的工作原理"><a href="#WFQ的工作原理" class="headerlink" title="WFQ的工作原理"></a>WFQ的工作原理</h3><p>WFQ算法的基本思想是，基于权重的公平性来调度多个流的数据包。它将每个流的带宽需求量（流的权重）和当前网络的总带宽来综合考虑。权重较大的流会获得更多的带宽，而权重较小的流则会得到较少的带宽。</p>
+<ol>
+<li><strong>流的权重</strong>：每个流都会分配一个权重，权重越大的流获取带宽的优先级越高。</li>
+<li><strong>队列调度</strong>：WFQ会为每个流维持一个队列，并通过权重来决定每个队列的调度顺序。权重较高的队列会优先获得带宽。</li>
+<li><strong>时间片的分配</strong>：WFQ会根据流的权重分配不同大小的时间片，权重较高的流会获得较大的时间片，而权重较低的流会获得较小的时间片。</li>
+<li><strong>公平性和优先级</strong>：WFQ不仅要保证每个流按照其权重获得带宽，而且要避免某些流因为过高的优先级而一直占用带宽，导致其他流无法得到带宽。</li>
+</ol>
+<h3 id="WFQ的关键特点："><a href="#WFQ的关键特点：" class="headerlink" title="WFQ的关键特点："></a>WFQ的关键特点：</h3><ul>
+<li><strong>加权</strong>：与普通的公平队列算法不同，WFQ根据流的权重来决定调度的优先级，权重越大的流优先级越高。</li>
+<li><strong>公平性</strong>：WFQ保证了不同流之间的带宽分配是公平的，即使在带宽紧张的情况下，流量较少的流仍能得到一定的带宽。</li>
+<li><strong>平滑性</strong>：通过细粒度的队列调度，WFQ能够平滑数据流，避免出现瞬时的带宽过载。</li>
+<li><strong>避免饥饿</strong>：通过合理的权重分配，WFQ能够避免低权重流被完全饱和的高权重流所“饿死”。</li>
+</ul>
+<h3 id="WFQ的应用："><a href="#WFQ的应用：" class="headerlink" title="WFQ的应用："></a>WFQ的应用：</h3><ol>
+<li><strong>网络带宽管理</strong>：在具有多个网络流的情况下，WFQ可以用来管理不同流之间的带宽分配，确保不同应用流的公平带宽分配。例如，视频流、语音流和普通数据流可以分配不同的权重，以确保它们的带宽需求得到满足。</li>
+<li><strong>流量整形和QoS</strong>：WFQ是实现质量服务（QoS）的一种常见方法。在网络中，某些应用（如视频、语音）需要更高的带宽保证，WFQ能够确保这类流优先分配带宽，而其他低优先级流则按需获取带宽。</li>
+<li><strong>流量调度</strong>：在负载较高的情况下，WFQ能够保证网络流量的调度平衡，并避免单个流过载。</li>
+<li><strong>分布式系统中的负载均衡</strong>：WFQ也可以用于后端微服务架构中的负载均衡，通过流量调度保证各个服务实例的负载均衡。</li>
+</ol>
+<h3 id="WFQ的实现原理："><a href="#WFQ的实现原理：" class="headerlink" title="WFQ的实现原理："></a>WFQ的实现原理：</h3><p>WFQ通常基于以下几个核心概念：</p>
+<ol>
+<li><strong>加权队列</strong>：每个流有一个队列，队列中的包按照权重进行排队，权重高的队列优先。</li>
+<li><strong>虚拟时间</strong>：每个数据包都有一个虚拟时间戳，它表示该数据包在队列中的理论处理时间。WFQ通过维护一个虚拟时间（也叫“完成时间”）来确定哪个包应该先被处理。</li>
+<li><strong>服务序列</strong>：WFQ通过为每个流计算虚拟服务序列，来决定哪个流应该先被处理。</li>
+</ol>
+<h3 id="WFQ的简化流程："><a href="#WFQ的简化流程：" class="headerlink" title="WFQ的简化流程："></a>WFQ的简化流程：</h3><ol>
+<li>对于每个流，WFQ根据流的权重计算每个数据包的虚拟时间。</li>
+<li>每个数据包根据虚拟时间进入队列，并按照虚拟时间进行调度。</li>
+<li>算法保证带宽分配按照权重比例进行，并且通过虚拟时间排序来决定每个包的发送顺序。</li>
+</ol>
+<h1 id="滑动窗口统计"><a href="#滑动窗口统计" class="headerlink" title="滑动窗口统计"></a>滑动窗口统计</h1><ul>
+<li>以固定时间窗口（如1分钟）为单位，但窗口</li>
+<li>统计窗口内的请求数量，超出限制则拒绝</li>
+<li>解决了固定窗口的“临界突发”问题，但仍然可能有更大的流量波动</li>
+</ul>
 
       </section>
 
@@ -149,8 +244,8 @@
     
     <div class="card-text">
       
-        <a href="/2025/04/06/%E5%88%86%E5%B8%83%E5%BC%8F%EF%BC%8C%E4%B8%BB%E4%BB%8E%E6%9E%B6%E6%9E%84%20%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%8C%BA%E5%88%AB/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">分布式，主从架构 微服务的区别</h2>
+        <a href="/2024/04/06/%E5%85%B1%E8%AF%86%E7%AE%97%E6%B3%95Raft/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">共识算法Raft</h2>
         </a>
       
       <div class="card-text--row">Newer</div>
@@ -162,12 +257,10 @@
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
-      <div class="card-cover" background-image-lazy data-img="/docker.jpg"></div>
-    
     <div class="card-text">
       
-        <a href="/2024/12/25/docker/" itemprop="url">
-          <h2 class="card-text--title text-ellipsis">docker</h2>
+        <a href="/2024/04/06/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AE%97%E6%B3%95/" itemprop="url">
+          <h2 class="card-text--title text-ellipsis">负载均衡算法</h2>
         </a>
       
       <div class="card-text--row">Older</div>

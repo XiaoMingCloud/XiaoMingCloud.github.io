@@ -46,7 +46,7 @@
 <!-- header container -->
 <header class="header-container post">
   
-    <div class="post-image" style="background-image: url(/1704264337798170426433788.jpg)"></div>
+    <div class="post-image" style="background-image: url(/docker.jpg)"></div>
   
 
   <!-- navbar -->
@@ -105,6 +105,11 @@
             <span>发布于</span>
             <time  class="article-date" datetime="2024-12-25T13:57:55.000Z" itemprop="datePublished">2024-12-25</time>
           </h2>
+          
+            <h2 class="last-time">
+              <span>最后更新于</span>
+              <time  class="article-updated" datetime="2025-04-05T17:51:39.287Z" itemprop="dateUpdated">2025-04-06</time>
+            </h2>
           
           
           <ul class="wrap-list dark">
@@ -251,6 +256,8 @@
             <div class="article-nav-item layout-padding">
   <article class="card-container article-nav-card content-padding--primary soft-size--large soft-style--box">
     
+      <div class="card-cover" background-image-lazy data-img="/1708925734783170892573440.jpg"></div>
+    
     <div class="card-text">
       
         <a href="/2024/04/06/%E4%B8%80%E8%87%B4%E6%80%A7%E5%93%88%E5%B8%8C%E7%AE%97%E6%B3%95/" itemprop="url">
@@ -389,13 +396,41 @@
 
     
 
-    <p>Powered by <a href="https://hexo.io" target="_blank" rel="noopener noreferrer">Hexo</a> Theme - <a href="https://github.com/miiiku/flex-block" target="_blank" rel="noopener noreferrer author">flex-block</a></p>
+
+  
+
 
     <p>
       <a href="javascript:;" id="theme-light">🌞 浅色</a>
       <a href="javascript:;" id="theme-dark">🌛 深色</a>
       <a href="javascript:;" id="theme-auto">🤖️ 自动</a>
     </p>
+
+    <p>
+      <span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+      <script>
+      var now = new Date(); 
+      function createtime() { 
+          var grt= new Date("06/24/2022 20:26:16");//在此处修改你的建站时间，格式：月/日/年 时:分:秒
+          now.setTime(now.getTime()+250); 
+          days = (now - grt ) / 1000 / 60 / 60 / 24; 
+          dnum = Math.floor(days); 
+          hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); 
+          hnum = Math.floor(hours); 
+          if(String(hnum).length ==1 ){hnum = "0" + hnum;}
+              minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum); 
+          mnum = Math.floor(minutes); 
+          if(String(mnum).length ==1 ){mnum = "0" + mnum;} 
+          seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum); 
+          snum = Math.round(seconds); 
+          if(String(snum).length ==1 ){snum = "0" + snum;} 
+          document.getElementById("timeDate").innerHTML = "本站已运行 "+dnum+" 天 "; 
+          document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒"; 
+      } 
+      setInterval("createtime()",250);
+      </script>
+  </p>
+  
   </div>
 </footer>
   </div>
